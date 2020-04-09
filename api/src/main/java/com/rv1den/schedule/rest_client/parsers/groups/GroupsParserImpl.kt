@@ -7,6 +7,7 @@ import org.json.JSONArray
 class GroupsParserImpl(private val groupParser: GroupParser) : GroupsParser {
     private lateinit var groups: ArrayList<Group>
     private lateinit var groupsJson: JSONArray
+
     override fun parse(groupsJson: JSONArray): List<Group> {
         groups = arrayListOf()
         this.groupsJson = groupsJson
