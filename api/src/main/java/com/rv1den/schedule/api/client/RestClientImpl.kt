@@ -43,7 +43,7 @@ class RestClientImpl : RestClient {
 
     private fun makeUpResponse() {
         val bufferedReader = bufferedReaderFactory.create(httpUrlConnection)
-        var line: String
+        var line: String?
         while (bufferedReader.readLine().also { line = it } != null) {
             content.append(line).append("\n")
         }

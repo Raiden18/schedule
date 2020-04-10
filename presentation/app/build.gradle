@@ -34,6 +34,11 @@ dependencies {
     implementation project(":data")
     implementation project(':api')
     implementation project(':presentation:groups')
+    implementation project(':presentation:core')
+
+    //Libs
+    implementation project(':libraries:async_framework:async_framework_i')
+    implementation project(':libraries:async_framework:async_framework_impl')
     testImplementation "io.mockk:mockk:1.9.3"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

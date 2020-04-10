@@ -1,22 +1,25 @@
 package com.rv1den.schedule.mvp.factories
 
 import androidx.fragment.app.Fragment
-import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCase
-import com.rv1den.schedule.groups.GroupsFragment
-import com.rv1den.schedule.groups.PresenterImpl
+import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCaseImpl
+import com.rv1den.schedule.groups.presenter.GroupsPresenter
+import com.rv1den.schedule.groups.view.GroupsFragment
+import com.rv1den.schedule.i_async_framework.AsyncFramework
+import io.mockk.mockk
 import io.mockk.spyk
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
 class MvpPresenterFactoryImplTest {
-    private lateinit var getGroupsUseCase: GetGroupsUseCase
+    private lateinit var getGroupsUseCase: GetGroupsUseCaseImpl
     private lateinit var presenterFactory: PresenterFactory
-
+    private lateinit var asyncFramework: AsyncFramework
     @Before
     fun getPresenter() {
-        getGroupsUseCase = spyk()
-        presenterFactory = PresenterFactoryImpl(getGroupsUseCase)
+        getGroupsUseCase = mockk(relaxed = true)
+        asyncFramework = spyk()
+        presenterFactory = PresenterFactoryImpl(getGroupsUseCase, asyncFramework)
     }
 
     @Test
@@ -28,7 +31,7 @@ class MvpPresenterFactoryImplTest {
         val presenter = presenterFactory.getPresenter(groupsFragmentClass)
 
         //Then
-        val isGroupsPresenter = presenter is PresenterImpl
+        val isGroupsPresenter = presenter is GroupsPresenter
         assertTrue(isGroupsPresenter)
     }
 

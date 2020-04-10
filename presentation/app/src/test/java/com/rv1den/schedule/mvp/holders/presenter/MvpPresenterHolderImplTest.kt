@@ -1,7 +1,7 @@
 package com.rv1den.schedule.mvp.holders.presenter
 
 import androidx.fragment.app.Fragment
-import com.rv1den.schedule.groups.MvpPresenter
+import com.rv1den.schedule.core.mvp.MvpPresenter
 import com.rv1den.schedule.mvp.factories.PresenterFactory
 import io.mockk.every
 import io.mockk.mockk

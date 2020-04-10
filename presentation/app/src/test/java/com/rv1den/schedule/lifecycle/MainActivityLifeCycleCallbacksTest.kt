@@ -3,6 +3,7 @@ package com.rv1den.schedule.lifecycle
 import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.rv1den.schedule.navigation.factory.FragmentsFactory
 import com.rv1den.schedule.navigation.navigator.FragmentNavigator
 import io.mockk.every
@@ -12,18 +13,21 @@ import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
 
-class MainActivityLifeCycleCallbackTest {
+class MainActivityLifeCycleCallbacksTest {
     private lateinit var fragmentNavigator: FragmentNavigator
     private lateinit var fragmentsFactory: FragmentsFactory
     private lateinit var simpleActivityLifecycleCallbacks: SimpleActivityLifecycleCallbacks
+    private lateinit var fragmentLifecycleCallbacks: FragmentManager.FragmentLifecycleCallbacks
 
     @Before
     fun setUp() {
         fragmentNavigator = spyk()
         fragmentsFactory = spyk()
-        simpleActivityLifecycleCallbacks = MainActivityLifeCycleCallback(
+        fragmentLifecycleCallbacks = spyk()
+        simpleActivityLifecycleCallbacks = MainActivityLifeCycleCallbacks(
             fragmentNavigator,
-            fragmentsFactory
+            fragmentsFactory,
+            fragmentLifecycleCallbacks
         )
     }
 
@@ -79,5 +83,32 @@ class MainActivityLifeCycleCallbackTest {
 
         //When
         simpleActivityLifecycleCallbacks.onActivityResumed(activity)
+    }
+
+    @Test
+    fun `Should register FragmentLifecycleCallback when activity is created`() {
+        //Given
+        val fragmentActivity: FragmentActivity = mockk(relaxed = true)
+        val fragmentManager: FragmentManager = mockk(relaxed = true)
+        every {
+            fragmentActivity.supportFragmentManager
+        } returns fragmentManager
+
+        //When
+        simpleActivityLifecycleCallbacks.onActivityCreated(fragmentActivity, null)
+
+        //Then
+        verify(exactly = 1) {
+            fragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true)
+        }
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun `Should throw IllegalStateException if activity is not FragmentActivity when activity created`() {
+        //Given
+        val activity: Activity = mockk(relaxed = true)
+
+        //When
+        simpleActivityLifecycleCallbacks.onActivityCreated(activity, null)
     }
 }

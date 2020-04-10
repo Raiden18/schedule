@@ -1,7 +1,7 @@
 package com.rv1den.schedule
 
 import android.app.Application
-import com.rv1den.schedule.lifecycle.MainActivityLifeCycleCallback
+import com.rv1den.schedule.lifecycle.MainActivityLifeCycleCallbacks
 import com.rv1den.schedule.provider.dependencies.GlobalDependenciesProviderImpl
 
 class ScheduleApplication : Application() {
@@ -9,9 +9,10 @@ class ScheduleApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val mainActivityLifeCycleCallback = MainActivityLifeCycleCallback(
+        val mainActivityLifeCycleCallback = MainActivityLifeCycleCallbacks(
             globalDependenciesProvider.provideFragmentNavigator(),
-            globalDependenciesProvider.provideFragmentFactory()
+            globalDependenciesProvider.provideFragmentFactory(),
+            globalDependenciesProvider.provideFragmentLifecycleCallbacks()
         )
         registerActivityLifecycleCallbacks(mainActivityLifeCycleCallback)
     }
