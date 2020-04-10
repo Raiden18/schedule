@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class GroupsFragment : Fragment(), GroupsView {
+class GroupsFragment : Fragment(), MvpView {
 
     override fun onCreateView(
         inflater: LayoutInflater,

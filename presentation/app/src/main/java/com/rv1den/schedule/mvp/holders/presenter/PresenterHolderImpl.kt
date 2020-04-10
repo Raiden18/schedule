@@ -1,16 +1,16 @@
 package com.rv1den.schedule.mvp.holders.presenter
 
 import androidx.fragment.app.Fragment
-import com.rv1den.schedule.groups.Presenter
+import com.rv1den.schedule.groups.MvpPresenter
 import com.rv1den.schedule.mvp.factories.PresenterFactory
 import kotlin.reflect.KClass
 
 class PresenterHolderImpl(
     private val presenterFactory: PresenterFactory
 ) : PresenterHolder {
-    private val presenterHolder = HashMap<KClass<Fragment>, Presenter>()
+    private val presenterHolder = HashMap<KClass<Fragment>, MvpPresenter>()
 
-    override fun getPresenter(fragmentClass: KClass<Fragment>): Presenter {
+    override fun getPresenter(fragmentClass: KClass<Fragment>): MvpPresenter {
         val isPresenterSaved = presenterHolder.containsKey(fragmentClass)
         if (!isPresenterSaved) {
             createPresenterAndSave(fragmentClass)

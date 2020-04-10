@@ -1,7 +1,7 @@
 package com.rv1den.schedule.mvp.holders.presenter
 
 import androidx.fragment.app.Fragment
-import com.rv1den.schedule.groups.Presenter
+import com.rv1den.schedule.groups.MvpPresenter
 import com.rv1den.schedule.mvp.factories.PresenterFactory
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +12,7 @@ import org.junit.Before
 
 import org.junit.Test
 
-class PresenterHolderImplTest {
+class MvpPresenterHolderImplTest {
     private lateinit var presenterFactory: PresenterFactory
     private lateinit var presenterHolder: PresenterHolder
 
@@ -26,10 +26,10 @@ class PresenterHolderImplTest {
     fun `Should create presenter if there is no presenter and then return it`() {
         //Given
         val fragment = Fragment::class
-        val presenter: Presenter = mockk()
+        val mvpPresenter: MvpPresenter = mockk()
         every {
             presenterFactory.getPresenter(fragment)
-        } returns presenter
+        } returns mvpPresenter
 
         //When
         val resultPresenter = presenterHolder.getPresenter(fragment)
@@ -38,17 +38,17 @@ class PresenterHolderImplTest {
         verify(exactly = 1) {
             presenterFactory.getPresenter(fragment)
         }
-        assertEquals(presenter, resultPresenter)
+        assertEquals(mvpPresenter, resultPresenter)
     }
 
     @Test
     fun `Should create presenter only once if presenter exists`(){
         //Given
         val fragment = Fragment::class
-        val presenter: Presenter = mockk()
+        val mvpPresenter: MvpPresenter = mockk()
         every {
             presenterFactory.getPresenter(fragment)
-        } returns presenter
+        } returns mvpPresenter
 
         //When
         val resultPresenter = presenterHolder.getPresenter(fragment)
@@ -60,7 +60,7 @@ class PresenterHolderImplTest {
         verify(exactly = 1) {
             presenterFactory.getPresenter(fragment)
         }
-        assertEquals(presenter, resultPresenter)
+        assertEquals(mvpPresenter, resultPresenter)
     }
 
 }

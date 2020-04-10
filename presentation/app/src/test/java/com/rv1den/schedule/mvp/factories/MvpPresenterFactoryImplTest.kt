@@ -1,18 +1,22 @@
 package com.rv1den.schedule.mvp.factories
 
 import androidx.fragment.app.Fragment
+import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCase
 import com.rv1den.schedule.groups.GroupsFragment
 import com.rv1den.schedule.groups.PresenterImpl
+import io.mockk.spyk
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class PresenterFactoryImplTest {
+class MvpPresenterFactoryImplTest {
+    private lateinit var getGroupsUseCase: GetGroupsUseCase
     private lateinit var presenterFactory: PresenterFactory
 
     @Before
     fun getPresenter() {
-        presenterFactory = PresenterFactoryImpl()
+        getGroupsUseCase = spyk()
+        presenterFactory = PresenterFactoryImpl(getGroupsUseCase)
     }
 
     @Test

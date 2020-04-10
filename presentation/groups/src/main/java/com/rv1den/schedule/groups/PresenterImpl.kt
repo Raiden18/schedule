@@ -1,5 +1,9 @@
 package com.rv1den.schedule.groups
 
-class PresenterImpl: Presenter {
+import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCase
+
+class PresenterImpl(
+    private val getGroupsUseCase: GetGroupsUseCase
+): MvpPresenter {
 
 }
