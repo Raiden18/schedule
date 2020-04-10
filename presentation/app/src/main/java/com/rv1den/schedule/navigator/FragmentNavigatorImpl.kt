@@ -11,7 +11,7 @@ class FragmentNavigatorImpl : FragmentNavigator, ActivityAttacher {
         activity?.supportFragmentManager
             ?.beginTransaction()
             ?.add(R.id.fragment_holder, fragment)
-            ?.commit()
+            ?.commitNow()
     }
 
     override fun navigateBack() {
