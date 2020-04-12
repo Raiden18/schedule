@@ -10,7 +10,7 @@ class ScheduleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val mainActivityLifeCycleCallback = MainActivityLifeCycleCallbacks(
-            globalDependenciesProvider.provideFragmentNavigator(),
+            globalDependenciesProvider.provideRouter(),
             globalDependenciesProvider.provideFragmentFactory(),
             globalDependenciesProvider.provideFragmentLifecycleCallbacks()
         )

@@ -17,9 +17,11 @@ import com.rv1den.schedule.lifecycle.FragmentLifeCycleCallbacks
 import com.rv1den.schedule.mvp.factories.PresenterFactoryImpl
 import com.rv1den.schedule.mvp.holders.presenter.PresenterHolderImpl
 import com.rv1den.schedule.navigation.factory.FragmentsFactoryImpl
-import com.rv1den.schedule.navigation.navigator.FragmentNavigatorImpl
+import com.rv1den.schedule.navigation.navigation.fragments.GroupsNavigatorImpl
+import com.rv1den.schedule.navigation.navigation.router.RouterImpl
 
 class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
+    //Navigation
     //Api
     private val restClient = RestClientImpl()
 
@@ -52,14 +54,16 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
 
     //Presentation
     private val javaConcurrentExecutor = JavaConcurrentExecutor()
+    private val router = RouterImpl()
+    private val groupsNavigator = GroupsNavigatorImpl(router)
     private val presenterFactory = PresenterFactoryImpl(
         groupsUseCase,
         javaConcurrentExecutor,
         saveGroupUseCase,
-        getScheduleForSavedGroup
+        getScheduleForSavedGroup,
+        groupsNavigator
     )
     private val presenterHolder = PresenterHolderImpl(presenterFactory)
-    private val fragmentNavigator = FragmentNavigatorImpl()
     private val fragmentFactory = FragmentsFactoryImpl()
     private val fragmentLifecycleCallbacks = FragmentLifeCycleCallbacks(presenterHolder)
 
@@ -67,6 +71,6 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
     //Providers
 
     override fun provideFragmentLifecycleCallbacks() = fragmentLifecycleCallbacks
-    override fun provideFragmentNavigator() = fragmentNavigator
+    override fun provideRouter() = router
     override fun provideFragmentFactory() = fragmentFactory
 }

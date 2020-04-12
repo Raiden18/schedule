@@ -9,11 +9,13 @@ import com.rv1den.schedule.i_async_framework.AsyncFramework
 class GroupsPresenter(
     private val asyncFramework: AsyncFramework,
     private val getGroupsUseCase: GetGroupsUseCaseImpl,
-    private val saveGroupUseCase: SaveGroupUseCase
+    private val saveGroupUseCase: SaveGroupUseCase,
+    private val groupsNavigator: GroupsNavigator
 ) : AbstractMvpPresenter<GroupsView>() {
 
     fun onGroupClick(group: Group) {
         saveGroupUseCase.execute(group)
+        groupsNavigator.openWeeksSchedule()
     }
 
     override fun onViewAttached() {

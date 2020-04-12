@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.rv1den.schedule.navigation.factory.FragmentsFactory
-import com.rv1den.schedule.navigation.navigator.FragmentNavigator
+import com.rv1den.schedule.navigation.navigation.router.Router
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
@@ -14,18 +14,18 @@ import org.junit.Before
 import org.junit.Test
 
 class MainActivityLifeCycleCallbacksTest {
-    private lateinit var fragmentNavigator: FragmentNavigator
+    private lateinit var router: Router
     private lateinit var fragmentsFactory: FragmentsFactory
     private lateinit var simpleActivityLifecycleCallbacks: SimpleActivityLifecycleCallbacks
     private lateinit var fragmentLifecycleCallbacks: FragmentManager.FragmentLifecycleCallbacks
 
     @Before
     fun setUp() {
-        fragmentNavigator = spyk()
+        router = spyk()
         fragmentsFactory = spyk()
         fragmentLifecycleCallbacks = spyk()
         simpleActivityLifecycleCallbacks = MainActivityLifeCycleCallbacks(
-            fragmentNavigator,
+            router,
             fragmentsFactory,
             fragmentLifecycleCallbacks
         )
@@ -44,7 +44,7 @@ class MainActivityLifeCycleCallbacksTest {
 
         //Then
         verify(exactly = 1) {
-            fragmentNavigator.navigateForward(fragment)
+            router.navigateForward(fragment)
         }
     }
 
@@ -58,7 +58,7 @@ class MainActivityLifeCycleCallbacksTest {
 
         //Then
         verify(exactly = 1) {
-            fragmentNavigator.attach(fragmentActivity)
+            router.attach(fragmentActivity)
         }
     }
 
@@ -72,7 +72,7 @@ class MainActivityLifeCycleCallbacksTest {
 
         //Then
         verify(exactly = 1) {
-            fragmentNavigator.release()
+            router.release()
         }
     }
 
@@ -134,7 +134,7 @@ class MainActivityLifeCycleCallbacksTest {
 
         //Then
         verify(exactly = 0) {
-            fragmentNavigator.navigateForward(fragment)
+            router.navigateForward(fragment)
         }
     }
 }

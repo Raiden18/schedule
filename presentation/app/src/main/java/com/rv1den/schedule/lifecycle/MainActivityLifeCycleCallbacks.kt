@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.rv1den.schedule.navigation.factory.FragmentsFactory
-import com.rv1den.schedule.navigation.navigator.FragmentNavigator
+import com.rv1den.schedule.navigation.navigation.router.Router
 
 class MainActivityLifeCycleCallbacks(
-    private val fragmentNavigator: FragmentNavigator,
+    private val router: Router,
     private val fragmentsFactory: FragmentsFactory,
     private val fragmentLifecycleCallbacks: FragmentManager.FragmentLifecycleCallbacks
 ) : SimpleActivityLifecycleCallbacks() {
@@ -22,7 +22,7 @@ class MainActivityLifeCycleCallbacks(
 
     override fun onActivityResumed(activity: Activity) {
         if (activity !is FragmentActivity) throw IllegalStateException("Activity must be child of the FragmentActivity")
-        fragmentNavigator.attach(activity)
+        router.attach(activity)
         val currentVisibleFragment = activity.supportFragmentManager.getVisibleFragment()
         if (currentVisibleFragment == null) {
             setRootScreen()
@@ -30,12 +30,12 @@ class MainActivityLifeCycleCallbacks(
     }
 
     override fun onActivityPaused(activity: Activity) {
-        fragmentNavigator.release()
+        router.release()
     }
 
     private fun setRootScreen() {
         val rootFragment = fragmentsFactory.createGroups()
-        fragmentNavigator.navigateForward(rootFragment)
+        router.navigateForward(rootFragment)
     }
 
     private fun FragmentManager.getVisibleFragment(): Fragment? {
