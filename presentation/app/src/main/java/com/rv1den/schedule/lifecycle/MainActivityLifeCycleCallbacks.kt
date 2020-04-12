@@ -23,8 +23,7 @@ class MainActivityLifeCycleCallbacks(
     override fun onActivityResumed(activity: Activity) {
         if (activity !is FragmentActivity) throw IllegalStateException("Activity must be child of the FragmentActivity")
         fragmentNavigator.attach(activity)
-        val fragmentManager = activity.supportFragmentManager
-        val currentVisibleFragment = fragmentManager.getVisibleFragment()
+        val currentVisibleFragment = activity.supportFragmentManager.getVisibleFragment()
         if (currentVisibleFragment == null) {
             setRootScreen()
         }

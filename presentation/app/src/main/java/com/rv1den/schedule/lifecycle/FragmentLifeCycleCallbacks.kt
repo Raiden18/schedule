@@ -25,11 +25,20 @@ class FragmentLifeCycleCallbacks(
         }
     }
 
-    private fun injectPresenterIn(fragment: AbstractMvpFragment){
+    override fun onFragmentDestroyed(fm: FragmentManager, fragment: Fragment) {
+        if (fragment is AbstractMvpFragment) {
+            presenterHolder.remove(fragment::class)
+        }
+        super.onFragmentDestroyed(fm, fragment)
+    }
+
+    private fun injectPresenterIn(fragment: AbstractMvpFragment) {
         val presenter = presenterHolder.getPresenter(fragment::class)
         presenter as AbstractMvpPresenter<MvpView>
         fragment.presener = presenter
         fragment as MvpView
         presenter.attach(fragment)
     }
+
+
 }

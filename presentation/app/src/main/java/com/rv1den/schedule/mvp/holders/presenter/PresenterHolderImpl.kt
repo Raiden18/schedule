@@ -22,4 +22,8 @@ class PresenterHolderImpl(
         val presenter = presenterFactory.getPresenter(fragmentClass)
         presenterHolder[fragmentClass] = presenter
     }
+
+    override fun <T : Fragment> remove(fragmentClass: KClass<T>) {
+        presenterHolder.remove(fragmentClass)
+    }
 }
