@@ -31,6 +31,7 @@ abstract class AbstractMvpFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        retainInstance = true
         return inflater.inflate(layouId, container, false)
     }
 

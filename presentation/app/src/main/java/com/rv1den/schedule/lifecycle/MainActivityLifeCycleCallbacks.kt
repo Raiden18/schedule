@@ -2,6 +2,7 @@ package com.rv1den.schedule.lifecycle
 
 import android.app.Activity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.rv1den.schedule.navigation.factory.FragmentsFactory
@@ -23,7 +24,8 @@ class MainActivityLifeCycleCallbacks(
         if (activity !is FragmentActivity) throw IllegalStateException("Activity must be child of the FragmentActivity")
         fragmentNavigator.attach(activity)
         val fragmentManager = activity.supportFragmentManager
-        if (fragmentManager.backStackEntryCount == 0) {
+        val currentVisibleFragment = fragmentManager.getVisibleFragment()
+        if (currentVisibleFragment == null) {
             setRootScreen()
         }
     }
@@ -36,4 +38,17 @@ class MainActivityLifeCycleCallbacks(
         val rootFragment = fragmentsFactory.createGroups()
         fragmentNavigator.navigateForward(rootFragment)
     }
+
+    private fun FragmentManager.getVisibleFragment(): Fragment? {
+        var fragment: Fragment? = null
+        fragments.forEach {
+            if (it.isVisible) {
+                fragment = it
+                return@forEach
+            }
+        }
+
+        return fragment
+    }
+
 }

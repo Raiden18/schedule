@@ -1,5 +1,6 @@
 package com.rv1den.schedule.groups.view
 
+import android.util.Log
 import android.view.View
 import com.rv1den.schedule.core.mvp.AbstractMvpFragment
 import com.rv1den.schedule.domain.models.enteties.Group
@@ -28,5 +29,10 @@ class GroupsFragment : AbstractMvpFragment(R.layout.fragment_groups), GroupsView
 
     override fun hideLoader() {
         loader.visibility = View.INVISIBLE
+    }
+
+    override fun onDestroy() {
+        Log.i("HUI", "DESTROY")
+        super.onDestroy()
     }
 }

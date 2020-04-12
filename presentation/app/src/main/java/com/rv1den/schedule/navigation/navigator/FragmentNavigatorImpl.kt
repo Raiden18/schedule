@@ -4,14 +4,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.rv1den.schedule.R
 
-class FragmentNavigatorImpl :
-    FragmentNavigator {
+class FragmentNavigatorImpl : FragmentNavigator {
     private var activity: FragmentActivity? = null
 
     override fun navigateForward(fragment: Fragment) {
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.fragment_holder, fragment)
+            ?.add(R.id.fragment_holder, fragment)
             ?.commitNow()
     }
 
