@@ -3,14 +3,9 @@ package com.rv1den.schedule.provider.dependencies
 import com.rv1den.schedule.api.client.RestClientImpl
 import com.rv1den.schedule.api.facades.GroupsFacadeRestClientImpl
 import com.rv1den.schedule.api.facades.ScheduleFacadeRestClientImpl
-import com.rv1den.schedule.api.mappers.day.SchoolDayMapperImpl
-import com.rv1den.schedule.api.mappers.group.GroupsMapperImpl
-import com.rv1den.schedule.api.mappers.lesson.LessonResponseMapperImpl
-import com.rv1den.schedule.api.mappers.lesson.factory.LessonFactoryImpl
-import com.rv1den.schedule.api.mappers.schedule.ScheduleMapperImpl
-import com.rv1den.schedule.api.mappers.weeks.even.EvenWeekMapperImpl
-import com.rv1den.schedule.api.mappers.weeks.factory.WeekFactoryImpl
-import com.rv1den.schedule.api.mappers.weeks.odd.OddWeekMapperImpl
+import com.rv1den.schedule.api.mappers.*
+import com.rv1den.schedule.api.mappers.factories.lesson.LessonFactoryImpl
+import com.rv1den.schedule.api.mappers.factories.week.WeekFactoryImpl
 import com.rv1den.schedule.async_framework_impl.JavaConcurrentExecutor
 import com.rv1den.schedule.data.repositories.group.GroupRepositoryImpl
 import com.rv1den.schedule.data.repositories.groups.GroupsRepositoryImpl
@@ -29,14 +24,26 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
     private val restClient = RestClientImpl()
 
     //Api Mappers
-    private val groupsParser = GroupsMapperImpl()
-    private val lessonFactory = LessonFactoryImpl()
-    private val lessonResponseMapper =  LessonResponseMapperImpl(lessonFactory)
-    private val schoolDayMapper = SchoolDayMapperImpl(lessonResponseMapper)
-    private val weekFactory = WeekFactoryImpl(schoolDayMapper)
-    private val evenWeekMapper = EvenWeekMapperImpl(weekFactory)
-    private val oddWeekMapper = OddWeekMapperImpl(weekFactory)
-    private val scheduleMapper = ScheduleMapperImpl(evenWeekMapper, oddWeekMapper)
+    private val groupsParser = GroupsMapper()
+    private val lessonFactory =
+        LessonFactoryImpl()
+    private val lessonResponseMapper =
+        LessonResponseMapper(lessonFactory)
+    private val schoolDayMapper =
+        SchoolDayMapper(lessonResponseMapper)
+    private val weekFactory =
+        WeekFactoryImpl(
+            schoolDayMapper
+        )
+    private val evenWeekMapper =
+        EvenWeekMapper(weekFactory)
+    private val oddWeekMapper =
+        OddWeekMapper(weekFactory)
+    private val scheduleMapper =
+        ScheduleMapper(
+            evenWeekMapper,
+            oddWeekMapper
+        )
 
     //Facades
     private val groupsFacadeRestClient = GroupsFacadeRestClientImpl(restClient, groupsParser)

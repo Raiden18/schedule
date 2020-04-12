@@ -1,11 +1,12 @@
-package com.rv1den.schedule.api.mappers.weeks.factory
+package com.rv1den.schedule.api.mappers.factories.week
 
 import com.rv1den.schedule.api.jsons.DayScheduleJsonScheme
-import com.rv1den.schedule.api.mappers.day.SchoolDayMapper
+import com.rv1den.schedule.api.mappers.Mapper
+import com.rv1den.schedule.domain.models.values.day.SchoolDay
 import com.rv1den.schedule.domain.models.values.schedule.SchoolWeek
 
 class WeekFactoryImpl(
-    private val schoolDayMapper: SchoolDayMapper
+    private val schoolDayMapper: Mapper<DayScheduleJsonScheme, SchoolDay>
 ) : WeekFactory {
     override fun create(
         mondayResponse: DayScheduleJsonScheme?,
@@ -18,32 +19,32 @@ class WeekFactoryImpl(
         val mondayOfOddWeek = if (mondayResponse == null) {
             SchoolWeek.createEmptyMonday()
         } else {
-            schoolDayMapper.convert(mondayResponse)
+            schoolDayMapper.map(mondayResponse)
         }
         val tuesdayOfOddWeek = if (tuesdayResponse == null) {
             SchoolWeek.createEmptyTuesday()
         } else {
-            schoolDayMapper.convert(tuesdayResponse)
+            schoolDayMapper.map(tuesdayResponse)
         }
         val wednesdayOfOddWeek = if (wednesdayResponse == null) {
             SchoolWeek.createEmptyWednesday()
         } else {
-            schoolDayMapper.convert(wednesdayResponse)
+            schoolDayMapper.map(wednesdayResponse)
         }
         val thursdayOfOddWeek = if (thursdayResponse == null) {
             SchoolWeek.createEmptyThursday()
         } else {
-            schoolDayMapper.convert(thursdayResponse)
+            schoolDayMapper.map(thursdayResponse)
         }
         val fridayOfOddWeek = if (fridayResponse == null) {
             SchoolWeek.createEmptyFriday()
         } else {
-            schoolDayMapper.convert(fridayResponse)
+            schoolDayMapper.map(fridayResponse)
         }
         val saturdayOfOddWeek = if (saturdayResponse == null) {
             SchoolWeek.createEmptySaturday()
         } else {
-            schoolDayMapper.convert(saturdayResponse)
+            schoolDayMapper.map(saturdayResponse)
         }
         return SchoolWeek(
             mondayOfOddWeek,
