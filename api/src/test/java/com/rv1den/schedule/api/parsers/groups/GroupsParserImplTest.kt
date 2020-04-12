@@ -2,7 +2,7 @@ package com.rv1den.schedule.api.parsers.groups
 
 import com.rv1den.schedule.api.parsers.group.GroupParser
 import com.rv1den.schedule.domain.models.enteties.Group
-import com.rv1den.schedule.domain.models.values.Title
+import com.rv1den.schedule.domain.models.values.group.GroupTitle
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
@@ -27,7 +27,9 @@ class GroupsParserImplTest {
         //Given
         val groupsJson: JSONArray = mockk()
         val groupJson: JSONObject = mockk()
-        val expectedGroup = Group(228, Title("24П"))
+        val expectedGroup = Group(228,
+            GroupTitle("24П")
+        )
         val expectedGroups = listOf(expectedGroup)
         every {
             groupsJson.length()

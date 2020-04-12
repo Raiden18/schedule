@@ -4,10 +4,19 @@ import android.view.View
 import com.rv1den.schedule.core.mvp.AbstractMvpFragment
 import com.rv1den.schedule.domain.models.enteties.Group
 import com.rv1den.schedule.groups.R
+import com.rv1den.schedule.groups.presenter.GroupsPresenter
 import com.rv1den.schedule.groups.presenter.GroupsView
 import kotlinx.android.synthetic.main.fragment_groups.*
 
 class GroupsFragment : AbstractMvpFragment(R.layout.fragment_groups), GroupsView {
+
+    fun getPresenter(): GroupsPresenter {
+        return presener as GroupsPresenter
+    }
+
+    override fun onPresenterAttached() {
+        groups.onGroupClick = getPresenter()::onGroupClick
+    }
 
     override fun showGroups(groups: List<Group>) {
         this.groups.showGroups(groups)

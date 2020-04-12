@@ -10,14 +10,23 @@ class GroupsRecyclerView(
     context: Context,
     attributeSet: AttributeSet
 ) : RecyclerView(context, attributeSet) {
+    lateinit var onGroupClick: (Group) -> Unit
+    private val groupsAdapter by lazy {
+        GroupsAdapter(onGroupClick)
+    }
 
     init {
         layoutManager = LinearLayoutManager(context)
     }
 
     fun showGroups(groups: List<Group>) {
-        val groupsAdapter = GroupsAdapter()
-        groupsAdapter.swapItems(groups)
         adapter = groupsAdapter
+        groupsAdapter.swapItems(groups)
+    }
+
+    override fun setAdapter(adapter: Adapter<*>?) {
+        if (this.adapter == null) {
+            super.setAdapter(adapter)
+        }
     }
 }

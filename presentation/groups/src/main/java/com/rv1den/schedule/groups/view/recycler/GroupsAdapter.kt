@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rv1den.schedule.domain.models.enteties.Group
 import com.rv1den.schedule.groups.R
 
-class GroupsAdapter : RecyclerView.Adapter<GroupViewHolder>() {
+class GroupsAdapter(
+    private val onGroupClick: (Group) -> Unit
+) : RecyclerView.Adapter<GroupViewHolder>() {
     private val products = arrayListOf<Group>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.fragment_group, parent, false)
-        return GroupViewHolder(itemView)
+        return GroupViewHolder(itemView, onGroupClick)
     }
 
     override fun getItemCount(): Int = products.size

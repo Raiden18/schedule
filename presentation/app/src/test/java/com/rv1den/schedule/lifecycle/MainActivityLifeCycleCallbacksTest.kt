@@ -111,4 +111,30 @@ class MainActivityLifeCycleCallbacksTest {
         //When
         simpleActivityLifecycleCallbacks.onActivityCreated(activity, null)
     }
+
+    @Test
+    fun `Shouldn't set root screen if root screen is already set`() {
+        //Given
+        val fragment: Fragment = mockk(relaxed = true)
+        every {
+            fragmentsFactory.createGroups()
+        } returns fragment
+        val fragmentActivity: FragmentActivity = mockk(relaxed = true)
+        val fragmentManager: FragmentManager = mockk(relaxed = true)
+        every {
+            fragmentActivity.supportFragmentManager
+        } returns fragmentManager
+        every {
+            fragmentManager.backStackEntryCount
+        } returns 1
+        //When
+        simpleActivityLifecycleCallbacks.onActivityResumed(fragmentActivity)
+        simpleActivityLifecycleCallbacks.onActivityResumed(fragmentActivity)
+        simpleActivityLifecycleCallbacks.onActivityResumed(fragmentActivity)
+
+        //Then
+        verify(exactly = 0) {
+            fragmentNavigator.navigateForward(fragment)
+        }
+    }
 }

@@ -22,7 +22,10 @@ class MainActivityLifeCycleCallbacks(
     override fun onActivityResumed(activity: Activity) {
         if (activity !is FragmentActivity) throw IllegalStateException("Activity must be child of the FragmentActivity")
         fragmentNavigator.attach(activity)
-        setRootScreen()
+        val fragmentManager = activity.supportFragmentManager
+        if (fragmentManager.backStackEntryCount == 0) {
+            setRootScreen()
+        }
     }
 
     override fun onActivityPaused(activity: Activity) {

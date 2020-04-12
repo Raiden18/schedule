@@ -26,8 +26,6 @@ class RestClientImpl : RestClient {
     private fun tryToMakeRequestAndDisconnect() {
         try {
             makeRequest()
-        } catch (exception: Exception) {
-            exception.printStackTrace()
         } finally {
             httpUrlConnection.disconnect()
         }

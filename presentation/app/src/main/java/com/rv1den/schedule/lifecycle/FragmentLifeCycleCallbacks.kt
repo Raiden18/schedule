@@ -21,11 +21,15 @@ class FragmentLifeCycleCallbacks(
     ) {
         super.onFragmentViewCreated(fm, fragment, v, savedInstanceState)
         if (fragment is AbstractMvpFragment) {
-            val presenter = presenterHolder.getPresenter(fragment::class)
-            presenter as AbstractMvpPresenter<MvpView>
-            fragment.presener = presenter
-            fragment as MvpView
-            presenter.attach(fragment)
+            injectPresenterIn(fragment)
         }
+    }
+
+    private fun injectPresenterIn(fragment: AbstractMvpFragment){
+        val presenter = presenterHolder.getPresenter(fragment::class)
+        presenter as AbstractMvpPresenter<MvpView>
+        fragment.presener = presenter
+        fragment as MvpView
+        presenter.attach(fragment)
     }
 }

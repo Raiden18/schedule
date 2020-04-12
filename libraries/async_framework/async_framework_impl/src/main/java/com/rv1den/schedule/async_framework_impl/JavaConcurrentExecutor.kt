@@ -4,7 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import com.rv1den.schedule.i_async_framework.AsyncFramework
 
-class JavaConcurrentExecutor() : AsyncFramework {
+class JavaConcurrentExecutor : AsyncFramework {
     private var thread: Thread? = null
 
     override fun <T> execute(

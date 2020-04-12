@@ -3,7 +3,7 @@ package com.rv1den.schedule.core.mvp
 abstract class AbstractMvpPresenter<V: MvpView> : MvpPresenter, ViewAttacher<V> {
     protected var mvpView: V? = null
 
-    protected open fun onViewAttached(){
+    open fun onViewAttached(){
 
     }
 

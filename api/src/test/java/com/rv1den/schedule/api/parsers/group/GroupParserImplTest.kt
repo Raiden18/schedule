@@ -1,7 +1,7 @@
 package com.rv1den.schedule.api.parsers.group
 
 import com.rv1den.schedule.domain.models.enteties.Group
-import com.rv1den.schedule.domain.models.values.Title
+import com.rv1den.schedule.domain.models.values.group.GroupTitle
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.Assert.assertEquals
@@ -30,7 +30,9 @@ class GroupParserImplTest {
         every {
             jsonGroup.getInt(any())
         } returns groupId
-        val expectedGroup = Group(groupId, Title(groupTitle))
+        val expectedGroup = Group(groupId,
+            GroupTitle(groupTitle)
+        )
 
         //When
         val result = groupParser.parse(jsonGroup)

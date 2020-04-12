@@ -7,11 +7,15 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_group.view.*
 
 class GroupViewHolder(
-    itemView: View
+    itemView: View,
+    private val onGroupClick: (Group) -> Unit
 ) : RecyclerView.ViewHolder(itemView), LayoutContainer {
     override val containerView: View? = itemView
 
     fun bind(group: Group) {
-        itemView.group_title.text = group.title.value
+        itemView.setOnClickListener {
+            onGroupClick(group)
+        }
+        itemView.group_title.text = group.groupTitle.value
     }
 }

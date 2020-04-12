@@ -7,7 +7,5 @@ class GetGroupsUseCaseImpl(
     private val groupsRepository: GroupsRepository
 ) {
 
-    fun execute(): List<Group> {
-        return groupsRepository.getGroups()
-    }
+    fun execute(): List<Group> = groupsRepository.getGroups()
 }

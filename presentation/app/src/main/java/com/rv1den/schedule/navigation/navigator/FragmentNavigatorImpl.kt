@@ -11,7 +11,7 @@ class FragmentNavigatorImpl :
     override fun navigateForward(fragment: Fragment) {
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.add(R.id.fragment_holder, fragment)
+            ?.replace(R.id.fragment_holder, fragment)
             ?.commitNow()
     }
 

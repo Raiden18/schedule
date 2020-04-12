@@ -10,7 +10,21 @@ import androidx.fragment.app.Fragment
 abstract class AbstractMvpFragment(
     @LayoutRes val layouId: Int
 ) : Fragment(), PresenterRequier {
-    override lateinit var presener: MvpPresenter
+    override var presener: MvpPresenter? = null
+        get() = field
+    set(value) {
+        field = value
+        onPresenterAttached()
+    }
+
+    protected open fun onPresenterAttached(){
+
+    }
+
+
+    final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
