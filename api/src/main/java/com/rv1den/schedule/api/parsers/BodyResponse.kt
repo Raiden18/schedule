@@ -10,6 +10,10 @@ class BodyResponse(
     override val body: JSONObject
         get() {
             val jsonArray = JSONArray(pureJson)
-            return jsonArray.getJSONObject(0)
+            return try {
+                jsonArray.getJSONObject(0)
+            } catch (exception: Exception) {
+                throw IllegalStateException("Response is empty")
+            }
         }
 }

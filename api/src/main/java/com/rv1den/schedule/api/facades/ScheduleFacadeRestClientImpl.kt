@@ -19,9 +19,22 @@ class ScheduleFacadeRestClientImpl(
         val groupId = group.id.toString()
         val resultUrl = GROUP_SCHEDULE + groupId
         val resultJson = restClient.getJson(resultUrl)
-        val bodyParser = BodyResponse(resultJson)
-        val body = bodyParser.body
-        val scheduleResponse = ScheduleResponse(body)
+        val bodyResponse = BodyResponse(resultJson)
+        return tryToParse(bodyResponse)
+    }
+    /**
+     * RestApi returns 2 arrays that is put one into another if result is empty
+     */
+    private fun tryToParse(bodyResponse: BodyResponse): Schedule {
+        return try {
+            parseResponse(bodyResponse)
+        } catch (e: IllegalStateException) {
+            Schedule.createEmpty()
+        }
+    }
+
+    private fun parseResponse(bodyResponse: BodyResponse): Schedule{
+        val scheduleResponse = ScheduleResponse(bodyResponse.body)
         return scheduleMapper.map(scheduleResponse)
     }
 }
