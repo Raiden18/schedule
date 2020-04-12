@@ -25,25 +25,13 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
 
     //Api Mappers
     private val groupsParser = GroupsMapper()
-    private val lessonFactory =
-        LessonFactoryImpl()
-    private val lessonResponseMapper =
-        LessonResponseMapper(lessonFactory)
-    private val schoolDayMapper =
-        SchoolDayMapper(lessonResponseMapper)
-    private val weekFactory =
-        WeekFactoryImpl(
-            schoolDayMapper
-        )
-    private val evenWeekMapper =
-        EvenWeekMapper(weekFactory)
-    private val oddWeekMapper =
-        OddWeekMapper(weekFactory)
-    private val scheduleMapper =
-        ScheduleMapper(
-            evenWeekMapper,
-            oddWeekMapper
-        )
+    private val lessonFactory = LessonFactoryImpl()
+    private val lessonResponseMapper = LessonResponseMapper(lessonFactory)
+    private val schoolDayMapper = SchoolDayMapper(lessonResponseMapper)
+    private val weekFactory = WeekFactoryImpl(schoolDayMapper)
+    private val evenWeekMapper = EvenWeekMapper(weekFactory)
+    private val oddWeekMapper = OddWeekMapper(weekFactory)
+    private val scheduleMapper = ScheduleMapper(evenWeekMapper, oddWeekMapper)
 
     //Facades
     private val groupsFacadeRestClient = GroupsFacadeRestClientImpl(restClient, groupsParser)
@@ -64,7 +52,12 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
 
     //Presentation
     private val javaConcurrentExecutor = JavaConcurrentExecutor()
-    private val presenterFactory = PresenterFactoryImpl(groupsUseCase, javaConcurrentExecutor, saveGroupUseCase, getScheduleForSavedGroup)
+    private val presenterFactory = PresenterFactoryImpl(
+        groupsUseCase,
+        javaConcurrentExecutor,
+        saveGroupUseCase,
+        getScheduleForSavedGroup
+    )
     private val presenterHolder = PresenterHolderImpl(presenterFactory)
     private val fragmentNavigator = FragmentNavigatorImpl()
     private val fragmentFactory = FragmentsFactoryImpl()
@@ -72,6 +65,7 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
 
 
     //Providers
+
     override fun provideFragmentLifecycleCallbacks() = fragmentLifecycleCallbacks
     override fun provideFragmentNavigator() = fragmentNavigator
     override fun provideFragmentFactory() = fragmentFactory
