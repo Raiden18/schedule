@@ -1,20 +1,17 @@
 package com.rv1den.schedule.groups.view.recycler
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rv1den.schedule.domain.models.enteties.Group
-import com.rv1den.schedule.groups.R
+import com.rv1den.schedule.groups.view.recycler.factory.ViewHolderFactory
 
 class GroupsAdapter(
-    private val onGroupClick: (Group) -> Unit
+    private val viewHolderFactory: ViewHolderFactory
 ) : RecyclerView.Adapter<GroupViewHolder>() {
     private val products = arrayListOf<Group>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.fragment_group, parent, false)
-        return GroupViewHolder(itemView, onGroupClick)
+        return viewHolderFactory.create(parent)
     }
 
     override fun getItemCount(): Int = products.size
@@ -24,7 +21,7 @@ class GroupsAdapter(
         holder.bind(item)
     }
 
-    fun swapItems(products: List<Group>){
+    fun swapItems(products: List<Group>) {
         this.products.clear()
         this.products.addAll(products)
         notifyDataSetChanged()

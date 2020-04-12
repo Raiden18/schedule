@@ -21,6 +21,8 @@
             <option value="$PROJECT_DIR$/presentation/app" />
             <option value="$PROJECT_DIR$/presentation/core" />
             <option value="$PROJECT_DIR$/presentation/groups" />
+            <option value="$PROJECT_DIR$/presentation/schedule" />
+            <option value="$PROJECT_DIR$/presentation/schedule/weeks" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

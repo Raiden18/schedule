@@ -8,6 +8,8 @@ import com.rv1den.schedule.domain.usecases.schedule.GetScheduleForSavedGroup
 import com.rv1den.schedule.groups.presenter.GroupsPresenter
 import com.rv1den.schedule.groups.view.GroupsFragment
 import com.rv1den.schedule.i_async_framework.AsyncFramework
+import com.rv1den.schedule.weeks.WeeksScheduleFragment
+import com.rv1den.schedule.weeks.WeeksSchedulePresenter
 import kotlin.reflect.KClass
 
 class PresenterFactoryImpl(
@@ -21,7 +23,10 @@ class PresenterFactoryImpl(
             GroupsFragment::class -> GroupsPresenter(
                 asyncFramework,
                 groupsUseCase,
-                saveGroupUseCase,
+                saveGroupUseCase
+            )
+            WeeksScheduleFragment::class -> WeeksSchedulePresenter(
+                asyncFramework,
                 getScheduleForSavedGroup
             )
             else -> throw IllegalStateException("Unknown fragment class")
