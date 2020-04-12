@@ -7,10 +7,11 @@
     <com.rv1den.schedule.groups.view.recycler.GroupsRecyclerView
         android:id="@+id/groups"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/loader"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>

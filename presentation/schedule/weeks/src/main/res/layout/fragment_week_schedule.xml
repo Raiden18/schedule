@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WEEK SCHEDULES" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_odd_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/odd_week_title"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+
+        <com.rv1den.schedule.weeks.view.WeekTableLayout
+            android:id="@+id/odd_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/title_even_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="@string/even_week_title"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <com.rv1den.schedule.weeks.view.WeekTableLayout
+            android:id="@+id/even_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</ScrollView>

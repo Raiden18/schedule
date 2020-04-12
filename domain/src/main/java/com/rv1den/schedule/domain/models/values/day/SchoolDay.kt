@@ -28,4 +28,7 @@ data class SchoolDay(
                 && thirdLesson.isEmpty()
                 && fourthLesson.isEmpty()
                 && fifthLesson.isEmpty()
+
+    val isLessonsExist: Boolean
+        get() = isNoLessons.not()
 }

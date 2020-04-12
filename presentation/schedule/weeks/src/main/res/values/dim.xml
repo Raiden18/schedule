@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="week_cell_side_long">40dp</dimen>
+    <dimen name="week_cell_side_margin">4dp</dimen>
+</resources>

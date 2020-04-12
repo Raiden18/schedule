@@ -28,4 +28,6 @@ data class Lesson(
             && type.isEmpty()
             && number.isEmpty()
 
+    fun isNotEmpty() = isEmpty().not()
+
 }

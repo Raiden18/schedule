@@ -1,6 +1,5 @@
 package com.rv1den.schedule.weeks
 
-import android.util.Log
 import com.rv1den.schedule.core.mvp.AbstractMvpPresenter
 import com.rv1den.schedule.domain.usecases.schedule.GetScheduleForSavedGroup
 import com.rv1den.schedule.i_async_framework.AsyncFramework
@@ -13,7 +12,7 @@ class WeeksSchedulePresenter(
     override fun onViewAttached() {
         asyncFramework.execute(
             onDoTask = getScheduleForSavedGroup::execute,
-            onSuccess = { Log.i("HUI", it.toString()) },
+            onSuccess = mvpView!!::showSchedule,
             onError = {}
         )
     }

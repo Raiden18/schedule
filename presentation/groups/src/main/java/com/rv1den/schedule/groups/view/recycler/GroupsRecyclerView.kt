@@ -20,6 +20,7 @@ class GroupsRecyclerView(
             onGroupClick
         )
     }
+    private lateinit var groups: ArrayList<Group>
     private val groupsAdapter by lazy { GroupsAdapter(viewHolderFactory) }
 
     init {
@@ -28,8 +29,10 @@ class GroupsRecyclerView(
 
     fun showGroups(groups: List<Group>) {
         adapter = groupsAdapter
+        this.groups = ArrayList(groups)
         groupsAdapter.swapItems(groups)
     }
+
 
     override fun setAdapter(adapter: Adapter<*>?) {
         if (this.adapter == null) {
