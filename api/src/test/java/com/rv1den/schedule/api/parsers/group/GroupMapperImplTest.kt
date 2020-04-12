@@ -10,12 +10,12 @@ import org.junit.Before
 
 import org.junit.Test
 
-class GroupParserImplTest {
-    private lateinit var groupParser: GroupParserImpl
+class GroupMapperImplTest {
+    private lateinit var groupParser: GroupMapperImpl
 
     @Before
     fun setUp() {
-        groupParser = GroupParserImpl()
+        groupParser = GroupMapperImpl()
     }
 
     @Test

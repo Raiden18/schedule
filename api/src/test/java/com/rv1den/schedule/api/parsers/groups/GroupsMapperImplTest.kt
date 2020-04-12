@@ -1,6 +1,6 @@
 package com.rv1den.schedule.api.parsers.groups
 
-import com.rv1den.schedule.api.parsers.group.GroupParser
+import com.rv1den.schedule.api.mappers.group.GroupsMapperImpl
 import com.rv1den.schedule.domain.models.enteties.Group
 import com.rv1den.schedule.domain.models.values.group.GroupTitle
 import io.mockk.every
@@ -12,14 +12,15 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class GroupsParserImplTest {
-    private lateinit var groupsParserImpl: GroupsParserImpl
-    private lateinit var groupParser: GroupParser
+class GroupsMapperImplTest {
+    private lateinit var groupsParserImpl: GroupsMapperImpl
+    private lateinit var groupMapper: GroupMapper
 
     @Before
     fun setUp() {
-        groupParser = spyk()
-        groupsParserImpl = GroupsParserImpl(groupParser)
+        groupMapper = spyk()
+        groupsParserImpl =
+            GroupsMapperImpl(groupMapper)
     }
 
     @Test
@@ -38,11 +39,11 @@ class GroupsParserImplTest {
             groupsJson.getJSONObject(0)
         } returns groupJson
         every {
-            groupParser.parse(any())
+            groupMapper.parse(any())
         } returns expectedGroup
 
         //When
-        val groups = groupsParserImpl.parse(groupsJson)
+        val groups = groupsParserImpl.map(groupsJson)
 
         //Then
         assertEquals(expectedGroups, groups)

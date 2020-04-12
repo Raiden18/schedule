@@ -1,7 +1,7 @@
 package com.rv1den.schedule.api.mappers.weeks.odd
 
+import com.rv1den.schedule.api.jsons.ScheduleJsonScheme
 import com.rv1den.schedule.api.mappers.weeks.factory.WeekFactory
-import com.rv1den.schedule.api.models.ScheduleJsonScheme
 import com.rv1den.schedule.domain.models.values.schedule.SchoolWeek
 
 class OddWeekMapperImpl(

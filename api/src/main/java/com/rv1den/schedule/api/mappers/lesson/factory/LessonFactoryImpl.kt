@@ -1,6 +1,6 @@
 package com.rv1den.schedule.api.mappers.lesson.factory
 
-import com.rv1den.schedule.api.models.LessonJsonScheme
+import com.rv1den.schedule.api.jsons.LessonJsonScheme
 import com.rv1den.schedule.domain.models.values.Number
 import com.rv1den.schedule.domain.models.values.lesson.*
 

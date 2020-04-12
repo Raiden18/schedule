@@ -1,7 +1,7 @@
-package com.rv1den.schedule.api.parsers.schedule
+package com.rv1den.schedule.api.parsers
 
-import com.rv1den.schedule.api.models.DayScheduleJsonScheme
-import com.rv1den.schedule.api.models.LessonJsonScheme
+import com.rv1den.schedule.api.jsons.DayScheduleJsonScheme
+import com.rv1den.schedule.api.jsons.LessonJsonScheme
 import org.json.JSONObject
 
 class SchoolDayResponse(

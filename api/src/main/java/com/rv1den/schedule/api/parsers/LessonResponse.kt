@@ -1,6 +1,6 @@
-package com.rv1den.schedule.api.parsers.schedule
+package com.rv1den.schedule.api.parsers
 
-import com.rv1den.schedule.api.models.LessonJsonScheme
+import com.rv1den.schedule.api.jsons.LessonJsonScheme
 import org.json.JSONObject
 
 class LessonResponse(

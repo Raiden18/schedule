@@ -1,7 +1,7 @@
 package com.rv1den.schedule.api.mappers.weeks.factory
 
+import com.rv1den.schedule.api.jsons.DayScheduleJsonScheme
 import com.rv1den.schedule.api.mappers.day.SchoolDayMapper
-import com.rv1den.schedule.api.models.DayScheduleJsonScheme
 import com.rv1den.schedule.domain.models.values.schedule.SchoolWeek
 
 class WeekFactoryImpl(

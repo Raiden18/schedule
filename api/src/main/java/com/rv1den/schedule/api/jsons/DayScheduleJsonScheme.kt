@@ -1,4 +1,4 @@
-package com.rv1den.schedule.api.models
+package com.rv1den.schedule.api.jsons
 
 interface DayScheduleJsonScheme {
     val first: LessonJsonScheme?

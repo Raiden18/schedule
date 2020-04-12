@@ -1,8 +1,8 @@
 package com.rv1den.schedule.api.mappers.schedule
 
+import com.rv1den.schedule.api.jsons.ScheduleJsonScheme
 import com.rv1den.schedule.api.mappers.weeks.even.EvenWeekMapper
 import com.rv1den.schedule.api.mappers.weeks.odd.OddWeekMapper
-import com.rv1den.schedule.api.models.ScheduleJsonScheme
 import com.rv1den.schedule.domain.models.values.schedule.Schedule
 
 class ScheduleMapperImpl(
