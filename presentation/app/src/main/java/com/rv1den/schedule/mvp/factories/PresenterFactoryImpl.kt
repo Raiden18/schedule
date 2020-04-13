@@ -2,8 +2,11 @@ package com.rv1den.schedule.mvp.factories
 
 import androidx.fragment.app.Fragment
 import com.rv1den.schedule.core.mvp.MvpPresenter
+import com.rv1den.schedule.day.presenter.DaySchedulePresenter
+import com.rv1den.schedule.day.view.DayScheduleFragment
 import com.rv1den.schedule.domain.usecases.group.SaveGroupUseCase
 import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCaseImpl
+import com.rv1den.schedule.domain.usecases.schedule.GetDayScheduleUseCase
 import com.rv1den.schedule.domain.usecases.schedule.GetScheduleForSavedGroup
 import com.rv1den.schedule.domain.usecases.schedule.SaveSchoolDayUseCase
 import com.rv1den.schedule.groups.presenter.GroupsNavigator
@@ -22,7 +25,8 @@ class PresenterFactoryImpl(
     private val getScheduleForSavedGroup: GetScheduleForSavedGroup,
     private val groupsNavigator: GroupsNavigator,
     private val saveSchoolDayUseCase: SaveSchoolDayUseCase,
-    private val weeksNavigator: WeeksNavigator
+    private val weeksNavigator: WeeksNavigator,
+    private val getDayScheduleUseCase: GetDayScheduleUseCase
 ) : PresenterFactory {
     override fun <T : Fragment> getPresenter(fragmentClass: KClass<T>): MvpPresenter {
         return when (fragmentClass) {
@@ -38,6 +42,7 @@ class PresenterFactoryImpl(
                 saveSchoolDayUseCase,
                 weeksNavigator
             )
+            DayScheduleFragment::class -> DaySchedulePresenter(getDayScheduleUseCase)
             else -> throw IllegalStateException("Unknown fragment class")
         }
 

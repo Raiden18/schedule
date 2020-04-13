@@ -9,4 +9,5 @@ interface ScheduleRepository {
     fun getScheduleFor(group: Group): Schedule
     fun saveSchoolDay(schoolDay: SchoolDay)
     fun saveWeek(schoolWeek: SchoolWeek)
+    fun getSavedSchoolDay(): SchoolDay
 }

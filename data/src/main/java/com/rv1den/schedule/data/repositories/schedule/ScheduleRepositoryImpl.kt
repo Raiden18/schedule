@@ -24,4 +24,8 @@ class ScheduleRepositoryImpl(
     override fun saveWeek(schoolWeek: SchoolWeek) {
 
     }
+
+    override fun getSavedSchoolDay(): SchoolDay {
+        return cacheSchoolDay
+    }
 }

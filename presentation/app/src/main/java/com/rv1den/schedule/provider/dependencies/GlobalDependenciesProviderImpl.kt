@@ -12,6 +12,7 @@ import com.rv1den.schedule.data.repositories.groups.GroupsRepositoryImpl
 import com.rv1den.schedule.data.repositories.schedule.ScheduleRepositoryImpl
 import com.rv1den.schedule.domain.usecases.group.SaveGroupUseCase
 import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCaseImpl
+import com.rv1den.schedule.domain.usecases.schedule.GetDayScheduleUseCase
 import com.rv1den.schedule.domain.usecases.schedule.GetScheduleForSavedGroup
 import com.rv1den.schedule.domain.usecases.schedule.SaveSchoolDayUseCase
 import com.rv1den.schedule.lifecycle.FragmentLifeCycleCallbacks
@@ -54,6 +55,7 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
         groupRepository
     )
     private val saveSchoolDay = SaveSchoolDayUseCase(scheduleRepository)
+    private val getDayScheduleUseCase = GetDayScheduleUseCase(scheduleRepository)
 
     //Navigation
     private val router = RouterImpl()
@@ -70,7 +72,8 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
         getScheduleForSavedGroup,
         groupsNavigator,
         saveSchoolDay,
-        weeksNavigator
+        weeksNavigator,
+        getDayScheduleUseCase
     )
     private val presenterHolder = PresenterHolderImpl(presenterFactory)
     private val fragmentFactory = FragmentsFactoryImpl()

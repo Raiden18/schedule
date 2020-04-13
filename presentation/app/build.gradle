@@ -37,6 +37,7 @@ dependencies {
     implementation project(':presentation:core')
     implementation project(':presentation:schedule:weeks')
     implementation project(':presentation:schedule:week')
+    implementation project(':presentation:schedule:day')
     //Libs
     implementation project(':libraries:async_framework:async_framework_i')
     implementation project(':libraries:async_framework:async_framework_impl')
