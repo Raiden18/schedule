@@ -1,4 +1,4 @@
-package com.rv1den.schedule.weeks.view
+package com.rv1den.schedule.weeks.view.schedule
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +13,11 @@ class TableCellTextView(textCell: String, context: Context) : TextView(context) 
     private val marginSide = getDimen(R.dimen.week_cell_side_margin).toInt()
 
     companion object {
-        fun createEmpty(context: Context) = TableCellTextView("", context)
+        fun createEmpty(context: Context) =
+            TableCellTextView(
+                "",
+                context
+            )
     }
 
     init {

@@ -1,4 +1,4 @@
-package com.rv1den.schedule.weeks.view
+package com.rv1den.schedule.weeks.view.schedule
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,12 +17,36 @@ class DayLessonsRow(
 
     companion object {
         const val MAX_NUMBER_OF_LESSONS = 5
-        fun createMonday(context: Context) = DayLessonsRow(NameOfDay.Monday, context)
-        fun createTuesday(context: Context) = DayLessonsRow(NameOfDay.Tuesday, context)
-        fun createWednesday(context: Context) = DayLessonsRow(NameOfDay.Wednesday, context)
-        fun createThursday(context: Context) = DayLessonsRow(NameOfDay.Thursday, context)
-        fun createFriday(context: Context) = DayLessonsRow(NameOfDay.Friday, context)
-        fun createSaturday(context: Context) = DayLessonsRow(NameOfDay.Saturday, context)
+        fun createMonday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Monday,
+                context
+            )
+        fun createTuesday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Tuesday,
+                context
+            )
+        fun createWednesday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Wednesday,
+                context
+            )
+        fun createThursday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Thursday,
+                context
+            )
+        fun createFriday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Friday,
+                context
+            )
+        fun createSaturday(context: Context) =
+            DayLessonsRow(
+                NameOfDay.Saturday,
+                context
+            )
     }
 
     init {
@@ -40,7 +64,7 @@ class DayLessonsRow(
         }
     }
 
-    fun addLessons(schoolDay: SchoolDay, onDayClick: (Int) -> Unit) {
+    fun addLessons(schoolDay: SchoolDay, onDayClick: (Lesson) -> Unit) {
         if (schoolDay.firstLesson.isNotEmpty()) {
             initCellLesson(schoolDay.firstLesson, onDayClick)
         }
@@ -59,21 +83,28 @@ class DayLessonsRow(
 
     }
 
-    private fun initCellLesson(lesson: Lesson, onDayClick: (Int) -> Unit) {
+    private fun initCellLesson(lesson: Lesson, onDayClick: (Lesson) -> Unit) {
         val lessonTextView = getVirtualChildAt(lesson.number.value) as TextView
         val lessonColor = ContextCompat.getColor(context, R.color.colorPrimary)
         lessonTextView.setBackgroundColor(lessonColor)
-        lessonTextView.setOnClickListener { onDayClick(lesson.number.value) }
+        lessonTextView.setOnClickListener { onDayClick(lesson) }
     }
 
     private fun iniDayName() {
         val dayName = context.resources.getString(nameOfDay.dayId)
-        val dayNameCell = TableCellTextView(dayName, context)
+        val dayNameCell =
+            TableCellTextView(
+                dayName,
+                context
+            )
         addView(dayNameCell)
     }
 
     private fun initEmptyLessons() {
-        val emptyCell = TableCellTextView.createEmpty(context)
+        val emptyCell =
+            TableCellTextView.createEmpty(
+                context
+            )
         addView(emptyCell)
     }
 }

@@ -1,4 +1,4 @@
-package com.rv1den.schedule.weeks
+package com.rv1den.schedule.weeks.presenter
 
 import com.rv1den.schedule.core.mvp.MvpView
 import com.rv1den.schedule.domain.models.values.schedule.Schedule

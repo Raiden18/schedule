@@ -22,6 +22,8 @@
             <option value="$PROJECT_DIR$/presentation/core" />
             <option value="$PROJECT_DIR$/presentation/groups" />
             <option value="$PROJECT_DIR$/presentation/schedule" />
+            <option value="$PROJECT_DIR$/presentation/schedule/day" />
+            <option value="$PROJECT_DIR$/presentation/schedule/week" />
             <option value="$PROJECT_DIR$/presentation/schedule/weeks" />
           </set>
         </option>

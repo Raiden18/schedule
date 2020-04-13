@@ -31,4 +31,12 @@ data class SchoolDay(
 
     val isLessonsExist: Boolean
         get() = isNoLessons.not()
+
+    fun contains(lesson: Lesson): Boolean {
+        return firstLesson == lesson
+                || secondLesson == lesson
+                || thirdLesson == lesson
+                || fourthLesson == lesson
+                || fifthLesson == lesson
+    }
 }

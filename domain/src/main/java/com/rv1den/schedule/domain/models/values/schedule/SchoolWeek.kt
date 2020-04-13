@@ -1,8 +1,9 @@
 package com.rv1den.schedule.domain.models.values.schedule
 
 import com.rv1den.schedule.domain.models.values.day.SchoolDay
+import com.rv1den.schedule.domain.models.values.lesson.Lesson
 
-class SchoolWeek(
+data class SchoolWeek(
     val monday: SchoolDay,
     val tuesday: SchoolDay,
     val wednesday: SchoolDay,
@@ -42,6 +43,27 @@ class SchoolWeek(
             && thursday.isNoLessons
             && friday.isNoLessons
             && saturday.isNoLessons
+
+    fun getDayFor(schoolLesson: Lesson): SchoolDay {
+        return when {
+            monday.contains(schoolLesson) -> monday
+            tuesday.contains(schoolLesson) -> tuesday
+            wednesday.contains(schoolLesson) -> wednesday
+            thursday.contains(schoolLesson) -> thursday
+            friday.contains(schoolLesson) -> friday
+            saturday.contains(schoolLesson) -> saturday
+            else -> throw IllegalStateException("There is no day for that lesson")
+        }
+    }
+
+    fun contains(schoolLesson: Lesson): Boolean {
+        return monday.contains(schoolLesson)
+                || tuesday.contains(schoolLesson)
+                || wednesday.contains(schoolLesson)
+                || thursday.contains(schoolLesson)
+                || friday.contains(schoolLesson)
+                || saturday.contains(schoolLesson)
+    }
 
     override fun toString(): String {
         return "monday: $monday \n" +

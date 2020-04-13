@@ -23,7 +23,7 @@ class GroupsPresenter(
     }
 
     private fun loadGroups() {
-        //mvpView?.showLoader()
+        mvpView?.showLoader()
         asyncFramework.execute(
             onDoTask = getGroupsUseCase::execute,
             onSuccess = ::onSuccess,
@@ -38,7 +38,7 @@ class GroupsPresenter(
 
     private fun onSuccess(groups: List<Group>) {
         mvpView?.showGroups(groups)
-        //mvpView?.hideLoader()
+        mvpView?.hideLoader()
 
     }
 

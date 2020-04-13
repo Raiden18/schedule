@@ -21,11 +21,12 @@
             android:textSize="24sp" />
 
 
-        <com.rv1den.schedule.weeks.view.WeekTableLayout
+        <com.rv1den.schedule.weeks.view.schedule.WeekTableLayout
             android:id="@+id/odd_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:paddingEnd="40dp" />
 
         <TextView
             android:id="@+id/title_even_week"
@@ -37,10 +38,11 @@
             android:textColor="@android:color/black"
             android:textSize="24sp" />
 
-        <com.rv1den.schedule.weeks.view.WeekTableLayout
+        <com.rv1den.schedule.weeks.view.schedule.WeekTableLayout
             android:id="@+id/even_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:paddingEnd="40dp" />
     </LinearLayout>
 </ScrollView>

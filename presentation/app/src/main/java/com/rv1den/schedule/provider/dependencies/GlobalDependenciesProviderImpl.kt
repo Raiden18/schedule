@@ -13,11 +13,13 @@ import com.rv1den.schedule.data.repositories.schedule.ScheduleRepositoryImpl
 import com.rv1den.schedule.domain.usecases.group.SaveGroupUseCase
 import com.rv1den.schedule.domain.usecases.groups.GetGroupsUseCaseImpl
 import com.rv1den.schedule.domain.usecases.schedule.GetScheduleForSavedGroup
+import com.rv1den.schedule.domain.usecases.schedule.SaveSchoolDayUseCase
 import com.rv1den.schedule.lifecycle.FragmentLifeCycleCallbacks
 import com.rv1den.schedule.mvp.factories.PresenterFactoryImpl
 import com.rv1den.schedule.mvp.holders.presenter.PresenterHolderImpl
 import com.rv1den.schedule.navigation.factory.FragmentsFactoryImpl
 import com.rv1den.schedule.navigation.navigation.fragments.GroupsNavigatorImpl
+import com.rv1den.schedule.navigation.navigation.fragments.WeeksNavigatorImpl
 import com.rv1den.schedule.navigation.navigation.router.RouterImpl
 
 class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
@@ -51,17 +53,24 @@ class GlobalDependenciesProviderImpl : GlobalDependenciesProvider {
         scheduleRepository,
         groupRepository
     )
+    private val saveSchoolDay = SaveSchoolDayUseCase(scheduleRepository)
+
+    //Navigation
+    private val router = RouterImpl()
+    private val groupsNavigator = GroupsNavigatorImpl(router)
+    private val weeksNavigator = WeeksNavigatorImpl(router)
 
     //Presentation
     private val javaConcurrentExecutor = JavaConcurrentExecutor()
-    private val router = RouterImpl()
-    private val groupsNavigator = GroupsNavigatorImpl(router)
+
     private val presenterFactory = PresenterFactoryImpl(
         groupsUseCase,
         javaConcurrentExecutor,
         saveGroupUseCase,
         getScheduleForSavedGroup,
-        groupsNavigator
+        groupsNavigator,
+        saveSchoolDay,
+        weeksNavigator
     )
     private val presenterHolder = PresenterHolderImpl(presenterFactory)
     private val fragmentFactory = FragmentsFactoryImpl()

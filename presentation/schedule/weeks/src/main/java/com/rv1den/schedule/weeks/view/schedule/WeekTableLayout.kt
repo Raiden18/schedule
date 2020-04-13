@@ -1,8 +1,9 @@
-package com.rv1den.schedule.weeks.view
+package com.rv1den.schedule.weeks.view.schedule
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TableLayout
+import com.rv1den.schedule.domain.models.values.lesson.Lesson
 import com.rv1den.schedule.domain.models.values.schedule.SchoolWeek
 
 class WeekTableLayout(context: Context, attributes: AttributeSet) :
@@ -13,7 +14,7 @@ class WeekTableLayout(context: Context, attributes: AttributeSet) :
     private lateinit var thursday: DayLessonsRow
     private lateinit var friday: DayLessonsRow
     private lateinit var saturday: DayLessonsRow
-    var onDayClick: (Int) -> Unit = {}
+    lateinit var onDayClick: (Lesson) -> Unit
 
     init {
         createSchedule()
@@ -55,7 +56,8 @@ class WeekTableLayout(context: Context, attributes: AttributeSet) :
     }
 
     private fun numberOfLesson() {
-        val numbersOfLessons = NumberOfLessonsHeader(context)
+        val numbersOfLessons =
+            NumberOfLessonsHeader(context)
         addView(numbersOfLessons)
     }
 

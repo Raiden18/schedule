@@ -1,4 +1,4 @@
-package com.rv1den.schedule.weeks.view
+package com.rv1den.schedule.weeks.view.schedule
 
 import android.content.Context
 import android.widget.TableRow
@@ -15,7 +15,11 @@ class NumberOfLessonsHeader(context: Context) : TableRow(context) {
     }
 
     private fun addLesson(number: String) {
-        val cell = TableCellTextView(number, context)
+        val cell =
+            TableCellTextView(
+                number,
+                context
+            )
         this.addView(cell)
     }
 }

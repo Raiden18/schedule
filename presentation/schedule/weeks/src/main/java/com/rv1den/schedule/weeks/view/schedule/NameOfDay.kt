@@ -1,4 +1,4 @@
-package com.rv1den.schedule.weeks.view
+package com.rv1den.schedule.weeks.view.schedule
 
 import com.rv1den.schedule.weeks.R
 
